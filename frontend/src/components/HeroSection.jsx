@@ -29,7 +29,7 @@ export default function HeroSection() {
           <Heading className="text-4xl md:text-6xl drop-shadow-md mb-6"> Unleash Your Game </Heading>
           <BodyText className="text-lg md:text-xl mb-8 text-[#E0E1DD]/90"> Premium Football Jerseys for Champions — Designed to Win. </BodyText>
           <a
-            href="#shop"
+            href="/shop"
             className="inline-block bg-[#E0E1DD] text-[#1B263B] font-semibold px-8 py-3 rounded-full shadow-lg hover:bg-[#ffffff] transition"
           >
             Shop Now
