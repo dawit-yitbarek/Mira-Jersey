@@ -35,7 +35,7 @@ export default function DeleteProducts() {
     try {
       setDeleteLoading(true)
       setDeleteError(false)
-      await api.delete(`${BackendUrl}/api/products/${confirmId}`);
+      await api.put(`${BackendUrl}/api/products/remove/${confirmId}`);
       setProducts(products.filter((item) => item.id !== confirmId));
       setConfirmId(null);
     } catch (err) {

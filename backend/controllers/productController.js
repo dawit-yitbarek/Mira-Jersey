@@ -1,10 +1,9 @@
-import cloudinary from '../models/cloudinary.js';
 import pool from '../models/db.js';
 
 // GET all products
 export const getProducts = async (req, res) => {
   try {
-    const result = await pool.query('SELECT * FROM jerseys ORDER BY id DESC');
+    const result = await pool.query('SELECT * FROM jerseys WHERE available > 0 ORDER BY id DESC');
     const products = result.rows
     res.json({ success: true, products });
   } catch (error) {
@@ -13,18 +12,6 @@ export const getProducts = async (req, res) => {
   }
 };
 
-// GET specific product
-export const selectItem = async (req, res) => {
-  const { id } = req.params;
-
-  try {
-    const result = await pool.query('SELECT * FROM products WHERE id = $1', [id])
-    const item = result.rows[0]
-    res.json({ success: true, item })
-  } catch (error) {
-    res.status(500).json({ success: false })
-  }
-};
 
 // GET Carted items
 export const cartedProducts = async (req, res) => {
@@ -42,7 +29,7 @@ export const cartedProducts = async (req, res) => {
 
   try {
     const { rows } = await pool.query(
-      'SELECT * FROM jerseys WHERE id = ANY($1::int[])',
+      'SELECT * FROM jerseys WHERE available > 0 AND id = ANY($1::int[])',
       [ids]
     );
 
@@ -56,7 +43,7 @@ export const cartedProducts = async (req, res) => {
 // GET featured products
 export const featuredProducts = async (req, res) => {
   try {
-    const result = await pool.query('SELECT * FROM jerseys ORDER BY id DESC LIMIT 3');
+    const result = await pool.query('SELECT * FROM jerseys WHERE available > 0 ORDER BY id DESC LIMIT 3');
     const products = result.rows;
     res.json({ success: true, products });
   } catch (error) {
@@ -114,11 +101,11 @@ export const updateProduct = async (req, res) => {
 };
 
 // DELETE product
-export const deleteProduct = async (req, res) => {
+export const removeProduct = async (req, res) => {
   try {
     const { id } = req.params;
-    await pool.query('DELETE FROM jerseys WHERE id = $1', [id]);
-    res.json({ success: true, message: 'Product deleted' });
+    await pool.query('UPDATE jerseys SET available = 0 WHERE id = $1', [id]);
+    res.json({ success: true, message: 'Product removed' });
   } catch (err) {
     console.error('Error from deleteProduct function', err.message)
     res.status(500).json({ error: 'Delete failed', success: false });

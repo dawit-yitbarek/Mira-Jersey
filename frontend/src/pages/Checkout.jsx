@@ -97,7 +97,7 @@ export default function CheckoutPage() {
                   required
                 />
                 <input
-                  type="text"
+                  type="tel"
                   placeholder="Phone Number"
                   value={form.phone}
                   onChange={(e) => setForm({ ...form, phone: e.target.value })}

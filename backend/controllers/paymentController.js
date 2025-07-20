@@ -91,17 +91,11 @@ export const verify = async (req, res) => {
         const { id, quantity } = item;
 
         // Deduct quantity
-        const availableLeft = await client.query(
-          'UPDATE jerseys SET available = available - $1 WHERE id = $2 RETURNING *',
+        await client.query(
+          'UPDATE jerseys SET available = available - $1 WHERE id = $2',
           [quantity, id]
         );
 
-        if (availableLeft.rows[0]?.available === 0) {
-          await client.query(
-            'DELETE FROM jerseys WHERE id = $1',
-            [id]
-          );
-        }
 
         // Insert into order_items
         await client.query(
