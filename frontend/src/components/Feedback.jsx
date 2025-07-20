@@ -18,6 +18,7 @@ const FeedbackComponent = () => {
         }
 
         try {
+            setSuccess(false)
             setLoading(true)
             setError('')
             await api.post(`${BackEndUrl}/api/feedback`, { name, quote, rating })
