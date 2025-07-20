@@ -10,7 +10,7 @@ export const uploadImage = async (req, res) => {
 
     const result = await new Promise((resolve, reject) => {
       cloudinary.uploader.upload_stream(
-        { folder: 'Akotet Shoes' },
+        { folder: 'Mira Jersey' },
         (error, result) => {
           if (error) reject(error);
           else resolve(result);
