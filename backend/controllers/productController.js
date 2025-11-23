@@ -3,7 +3,7 @@ import pool from '../models/db.js';
 // GET all products
 export const getProducts = async (req, res) => {
   try {
-    const result = await pool.query('SELECT * FROM jerseys WHERE available > 0 ORDER BY id DESC');
+    const result = await pool.query('SELECT * FROM jerseys WHERE available > 0 ORDER BY created_at DESC');
     const products = result.rows
     res.json({ success: true, products });
   } catch (error) {
@@ -43,7 +43,7 @@ export const cartedProducts = async (req, res) => {
 // GET featured products
 export const featuredProducts = async (req, res) => {
   try {
-    const result = await pool.query('SELECT * FROM jerseys WHERE available > 0 ORDER BY id DESC LIMIT 3');
+    const result = await pool.query('SELECT * FROM jerseys WHERE available > 0 ORDER BY created_at DESC LIMIT 3');
     const products = result.rows;
     res.json({ success: true, products });
   } catch (error) {
