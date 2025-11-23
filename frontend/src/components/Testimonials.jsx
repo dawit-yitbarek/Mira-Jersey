@@ -4,7 +4,6 @@ import { Quote, X } from "lucide-react";
 import { RetryButton } from "./ErrorRetry";
 import {TestimonialsSkeleton} from "./SkeletonPlaceholders";
 import api from "./Api";
-const BackEndUrl = import.meta.env.VITE_BACKEND_URL;
 
 export default function TestimonialsSection() {
 
@@ -21,7 +20,7 @@ export default function TestimonialsSection() {
             try {
                 setLoading(true)
                 setError(false)
-                const response = await api.get(`${BackEndUrl}/api/feedback`);
+                const response = await api.get(`/api/feedback`);
                 setTestimonials(response.data.feedback)
             } catch (error) {
                 setError(true)

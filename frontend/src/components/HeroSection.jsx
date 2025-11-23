@@ -36,7 +36,7 @@ export default function HeroSection() {
           </a>
         </div>
 
-        {/* Right Hero Image with stylized display */}
+        {/* Right Hero Image */}
         <div className="relative flex justify-center">
           <img
             src="/images/hero.webp"

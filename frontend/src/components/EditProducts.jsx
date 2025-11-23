@@ -4,8 +4,6 @@ import { EditProductsSkeleton } from "../components/SkeletonPlaceholders";
 import UploadImage from './UploadImage';
 import api from "./Api";
 
-const BackendUrl = import.meta.env.VITE_BACKEND_URL;
-
 export default function EditProducts() {
   const [products, setProducts] = useState([]);
   const [editing, setEditing] = useState(null);
@@ -23,7 +21,7 @@ export default function EditProducts() {
       try {
         setLoading(true);
         setError(false)
-        const res = await api.get(`${BackendUrl}/api/products`);
+        const res = await api.get(`/api/products`);
         setProducts(res.data.products);
       } catch (error) {
         setError(true)
@@ -43,7 +41,7 @@ export default function EditProducts() {
     try {
       setEditLoading(true);
       setEditError(false)
-      await api.put(`${BackendUrl}/api/products/${editing}`, updatedData);
+      await api.put(`/api/products/${editing}`, updatedData);
       const updated = products.map((p) => (p.id === editing ? updatedData : p));
       setProducts(updated);
       setEditing(null);

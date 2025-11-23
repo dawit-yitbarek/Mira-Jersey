@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from "../components/Api";
 import { CheckoutSkeleton } from "../components/SkeletonPlaceholders";
-const BackEndUrl = import.meta.env.VITE_BACKEND_URL;
 
 export default function CheckoutPage() {
   const [cart, setCart] = useState([]);
@@ -17,7 +16,7 @@ export default function CheckoutPage() {
       const ids = raw.map((item) => item.id).join(",");
 
       try {
-        const res = await api.get(`${BackEndUrl}/api/products/carted?ids=${ids}`);
+        const res = await api.get(`/api/products/carted?ids=${ids}`);
         const jerseys = res.data.jersey;
 
         const merged = raw
@@ -52,7 +51,7 @@ export default function CheckoutPage() {
     try {
       setPaymentLoading(true)
       setError(false)
-      const res = await api.post(`${BackEndUrl}/api/payment/initiate`, {
+      const res = await api.post(`/api/payment/initiate`, {
         price: totalPrice,
         name: form.name,
         phone: form.phone,

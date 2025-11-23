@@ -4,7 +4,6 @@ import { RetryButton } from "../components/ErrorRetry";
 import api from "../components/Api";
 import { CartSkeleton } from "../components/SkeletonPlaceholders";
 import { useNavigate } from "react-router-dom";
-const BackEndUrl = import.meta.env.VITE_BACKEND_URL;
 
 export default function CartPage() {
   const navigate = useNavigate();
@@ -13,7 +12,7 @@ export default function CartPage() {
   const [error, setError] = useState(false);
   const [refresh, setRefresh] = useState(0)
 
-  // ✅ Load cart from localStorage and sync with backend
+  // Load cart from localStorage and sync with backend
   useEffect(() => {
     const rawCart = JSON.parse(localStorage.getItem("mira-cart")) || [];
     if (rawCart.length === 0) return;
@@ -25,7 +24,7 @@ export default function CartPage() {
         setLoading(true);
         setError(false);
 
-        const response = await api.get(`${BackEndUrl}/api/products/carted?ids=${ids}`);
+        const response = await api.get(`/api/products/carted?ids=${ids}`);
         const jerseys = response.data.jersey;
 
         const merged = rawCart

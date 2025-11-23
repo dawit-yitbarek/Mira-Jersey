@@ -1,6 +1,6 @@
 import React from "react";
 import FeedbackComponent from '../components/Feedback';
-import { FaTelegramPlane, FaTiktok, FaEnvelope, FaPhoneAlt, FaInstagram, FaFacebook, FaMapMarker } from 'react-icons/fa';
+import { FaTelegramPlane, FaTiktok, FaPhoneAlt, FaInstagram, FaMapMarker } from 'react-icons/fa';
 import "@fontsource/poppins";
 
 export default function ContactPage() {

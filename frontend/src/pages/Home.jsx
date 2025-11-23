@@ -4,7 +4,6 @@ import ShopPreviewSection from "../components/ShopPreview";
 import WhyChooseUsSection from "../components/WhyChooseUs";
 import TestimonialsSection from "../components/Testimonials";
 import CallToActionSection from "../components/CTASection";
-import FooterSection from "../components/Footer"
 
 export default function HomePage() {
   return (

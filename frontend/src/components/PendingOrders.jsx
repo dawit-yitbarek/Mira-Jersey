@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { RetryButton } from './ErrorRetry';
 import { OrdersSkeleton } from "./SkeletonPlaceholders";
 import api from "../components/Api";
-const BackEndUrl = import.meta.env.VITE_BACKEND_URL;
 
 const OrderDate = (date) => {
     const d = new Date(date)
@@ -33,7 +32,7 @@ export default function PendingOrders() {
             try {
                 setLoading(true);
                 setError(false)
-                const response = await api.get(`${BackEndUrl}/api/orders/pending`);
+                const response = await api.get(`/api/orders/pending`);
                 setOrders(response.data);
             } catch (error) {
                 setError(true)
@@ -49,7 +48,7 @@ export default function PendingOrders() {
         try {
             setConfirmLoading(true);
             setConfirmError(false);
-            await api.put(`${BackEndUrl}/api/orders/${orderId}`);
+            await api.put(`/api/orders/${orderId}`);
             setOrders((prev) =>
                 prev.filter((o) =>
                     o.order_id !== orderId
@@ -146,7 +145,7 @@ export default function PendingOrders() {
             )}
 
             {loading && (
-                <OrdersSkeleton pending={true}/>
+                <OrdersSkeleton pending={true} />
             )}
 
             {error && (

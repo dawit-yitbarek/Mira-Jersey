@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import api from "./Api";
-const BackEndUrl = import.meta.env.VITE_BACKEND_URL;
 
 const FeedbackComponent = () => {
     const [name, setName] = useState('');
@@ -21,7 +20,7 @@ const FeedbackComponent = () => {
             setSuccess(false)
             setLoading(true)
             setError('')
-            await api.post(`${BackEndUrl}/api/feedback`, { name, quote, rating })
+            await api.post(`/api/feedback`, { name, quote, rating })
             setSuccess(true);
             setName('');
             setQuote('');
@@ -45,7 +44,7 @@ const FeedbackComponent = () => {
                     className="w-full p-3 rounded-xl bg-[#2C3E50] border border-[#90E0EF]/30 text-white placeholder:text-[#E0E1DD]/70 outline-none focus:ring-2 focus:ring-[#90E0EF]"
                     required
                 />
-             
+
                 <textarea
                     placeholder="Your Message"
                     rows="4"

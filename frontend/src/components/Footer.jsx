@@ -1,6 +1,5 @@
 import React from "react";
-import { Facebook, Instagram, Mail, Phone, Send } from "lucide-react";
-import { FaTelegramPlane, FaTiktok, FaEnvelope, FaPhoneAlt, FaInstagram, FaFacebook, FaMapMarker } from 'react-icons/fa';
+import { FaTelegramPlane, FaTiktok, FaPhoneAlt, FaInstagram, FaMapMarker } from 'react-icons/fa';
 
 export default function FooterSection() {
 

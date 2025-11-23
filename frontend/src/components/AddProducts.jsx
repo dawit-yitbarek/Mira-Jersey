@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import UploadImage from "../components/UploadImage";
-import axios from "axios";
-const BackEndUrl = import.meta.env.VITE_BACKEND_URL;
+import api from "./Api";
 
 export default function AddProducts() {
   const [products, setProducts] = useState([
@@ -33,7 +32,7 @@ export default function AddProducts() {
     try {
       setAddLoading(true);
       setAddError(false)
-      await axios.post(`${BackEndUrl}/api/products`, { jerseys: products });
+      await api.post("/api/products", { jerseys: products });
       setAddSuccess(true)
       setProducts([{ club: "", season: "", price: "", available: "", image_url: "" }]);
       setImageReset(prev => prev + 1)

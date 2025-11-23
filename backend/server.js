@@ -32,7 +32,7 @@ app.use('/api/payment', paymentRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/feedback', feedbackRoutes);
 
-// Add a health check endpoint to confirm backend is running
+// a health check endpoint to confirm backend is running
 app.get('/health', (req, res) => {
   res.status(200).send('OK');
 });

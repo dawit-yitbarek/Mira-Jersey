@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { RetryButton } from './ErrorRetry';
 import api from "../components/Api";
 import { EditProductsSkeleton } from "./SkeletonPlaceholders";
-const BackendUrl = import.meta.env.VITE_BACKEND_URL;
 
 export default function DeleteProducts() {
   const [products, setProducts] = useState([]);
@@ -20,7 +19,7 @@ export default function DeleteProducts() {
       try {
         setLoading(true);
         setError(false);
-        const res = await api.get(`${BackendUrl}/api/products`);
+        const res = await api.get(`/api/products`);
         setProducts(res.data.products);
       } catch (error) {
         setError(true)
@@ -35,7 +34,7 @@ export default function DeleteProducts() {
     try {
       setDeleteLoading(true)
       setDeleteError(false)
-      await api.put(`${BackendUrl}/api/products/remove/${confirmId}`);
+      await api.put(`/api/products/remove/${confirmId}`);
       setProducts(products.filter((item) => item.id !== confirmId));
       setConfirmId(null);
     } catch (err) {

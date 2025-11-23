@@ -4,7 +4,6 @@ import { RetryButton } from "../components/ErrorRetry";
 import { ShowPreviewSkeleton } from "../components/SkeletonPlaceholders";
 import "@fontsource/poppins";
 import api from "../components/Api";
-const BackEndUrl = import.meta.env.VITE_BACKEND_URL;
 
 
 export default function ShopPage() {
@@ -21,7 +20,7 @@ export default function ShopPage() {
       try {
         setLoading(true)
         setError(false)
-        const response = await api.get(`${BackEndUrl}/api/products`);
+        const response = await api.get(`/api/products`);
         setJersey(response.data.products);
       } catch (error) {
         setError(true)

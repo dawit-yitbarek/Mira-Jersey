@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { RetryButton } from './ErrorRetry';
 import api from "../components/Api";
 import { OrdersSkeleton } from "./SkeletonPlaceholders";
-const BackEndUrl = import.meta.env.VITE_BACKEND_URL;
 
 export default function DeliveredOrders() {
     const [orders, setOrders] = useState([]);
@@ -15,7 +14,7 @@ export default function DeliveredOrders() {
             try {
                 setLoading(true);
                 setError(false)
-                const response = await api.get(`${BackEndUrl}/api/orders/delivered`);
+                const response = await api.get(`/api/orders/delivered`);
                 setOrders(response.data);
             } catch (error) {
                 setError(true)
@@ -82,7 +81,7 @@ export default function DeliveredOrders() {
                                     </div>
                                     <div className="text-sm text-[#E0E1DD]/70">
                                         Season: {item.season}
-                                    </div>                                    
+                                    </div>
                                 </div>
                             </div>
                         ))}

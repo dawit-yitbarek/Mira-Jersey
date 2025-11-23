@@ -4,7 +4,6 @@ import api from "./Api";
 import { RetryButton } from "./ErrorRetry";
 import { ShowPreviewSkeleton } from "./SkeletonPlaceholders";
 import "@fontsource/poppins";
-const BackEndUrl = import.meta.env.VITE_BACKEND_URL;
 
 
 export default function ShopPreviewSection() {
@@ -18,7 +17,7 @@ export default function ShopPreviewSection() {
             try {
                 setLoading(true)
                 setError(false)
-                const response = await api.get(`${BackEndUrl}/api/products/featured`)
+                const response = await api.get(`/api/products/featured`)
                 setJerseys(response.data.products)
             } catch (error) {
                 setError(true)

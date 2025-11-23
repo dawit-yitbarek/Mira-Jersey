@@ -5,7 +5,6 @@ export default function AboutPage() {
     return (
         <section className="max-w-7xl py-7 h-auto bg-gradient-to-b from-[#0D1B2A] to-[#1B263B] text-[#E0E1DD] font-[Poppins]">
 
-            {/* Hero-like Intro Section */}
             <div className="text-center px-6 py-20"
                 style={{ background: "radial-gradient(circle at 40% 30%, #0077B6 0%, #001F3F 50%, #000000 100%)", }}>
                 <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-[#90E0EF] mb-4">
