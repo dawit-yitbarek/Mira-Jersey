@@ -142,6 +142,12 @@ export default function AddProducts() {
           </button>
         </div>
       </form>
+
+      <div className="w-full flex justify-end mt-4">
+        <button
+          onClick={() => { localStorage.removeItem('isAdmin'); window.location.reload() }}
+          className="px-4 py-2 text-white bg-red-700 rounded-md">Logout</button>
+      </div>
     </section>
   );
 }
