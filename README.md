@@ -54,91 +54,118 @@ CREATE TABLE IF NOT EXISTS public.jerseys
 (
   id SERIAL PRIMARY KEY,
   club VARCHAR(100) NOT NULL,
-  season VARCHAR(20) NOT NULL,
-  price INTEGER NOT NULL,
-  available INTEGER NOT NULL,
-  image_url TEXT NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+  # Mira Jersey
 
-CREATE TABLE IF NOT EXISTS public.orders
-(
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  customer_name VARCHAR(100) NOT NULL,
-  phone VARCHAR(20) NOT NULL,
-  address TEXT NOT NULL,
-  total_amount INTEGER NOT NULL,
-  payment_status VARCHAR(20) DEFAULT 'pending',
-  chapa_tx_ref VARCHAR(100),
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+  Mira Jersey is a lightweight e-commerce demo for selling football jerseys. It includes a React + Vite frontend and an Express backend with Cloudinary image uploads and Chapa payment integration.
 
-CREATE TABLE IF NOT EXISTS public.order_items
-(
-  id SERIAL PRIMARY KEY,
-  order_id UUID,
-  jersey_id INTEGER,
-  quantity INTEGER NOT NULL,
-  CONSTRAINT order_items_jersey_id_fkey FOREIGN KEY (jersey_id)
-    REFERENCES public.jerseys (id) ON DELETE NO ACTION,
-  CONSTRAINT order_items_order_id_fkey FOREIGN KEY (order_id)
-    REFERENCES public.orders (id) ON DELETE CASCADE
-);
+  ## Key Features
 
-CREATE TABLE IF NOT EXISTS public.feedback
-(
-  id SERIAL PRIMARY KEY,
-  name VARCHAR(50) NOT NULL,
-  rating INTEGER NOT NULL,
-  quote TEXT NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+  - Browse and search jerseys by club and season
+  - Product detail pages with images and pricing
+  - Cart and checkout flow with Chapa payment integration
+  - Admin features to add/edit/delete products and manage orders
+  - Image uploads via Cloudinary
+  - Responsive UI built with Tailwind CSS
 
+  ## Tech Stack
 
-⚙️ Installation & Setup
+  - Frontend: React, Vite, Tailwind CSS, Axios
+  - Backend: Node.js, Express
+  - Storage: PostgreSQL (expected), Cloudinary for images
+  - Payments: Chapa (payment gateway)
 
-Clone the repository and install dependencies for both backend and frontend:
+  ## Repository Layout
 
-git https://github.com/dawit-yitbarek/Mira-Jersey.git
-cd Mira-Jersey
+  - `backend/` — Express server, routes, controllers, models
+  - `frontend/` — React + Vite application
+  - `public/`, `src/` — frontend assets and components
 
+  ## Prerequisites
 
-📦 Backend Setup
-cd backend
-npm install
+  - Node.js 16+ and npm
+  - PostgreSQL database (or other compatible connection string)
+  - Cloudinary account (for image uploads)
+  - Chapa account/secret (for payments)
 
+  ## Quick Start (Windows PowerShell)
 
-Create a .env file inside /backend:
+  Clone the repo and install dependencies for both backend and frontend:
 
-DATABASE_URL=your_postgres_url
-FRONTEND_URL=your_frontend_url
-BACKEND_URL=your_backend_url
-CLOUDINARY_CLOUD_NAME=your_cloudinary_name
-CLOUDINARY_API_KEY=your_cloudinary_key
-CLOUDINARY_API_SECRET=your_cloudinary_secret
-CHAPA_API_SECRET=your_chapa_secret
-PORT=port_number
+  ```powershell
+  git clone https://github.com/dawit-yitbarek/Mira-Jersey.git
+  cd Mira-Jersey
+  ```
 
+  ### Backend
 
-Start the backend:
-node server.js
+  ```powershell
+  cd backend
+  npm install
+  # Create .env in backend/ (example below)
+  # Start backend
+  node server.js
+  ```
 
-💻 Frontend Setup
-cd frontend
-npm install
+  Recommended backend `.env` variables (create `backend/.env`):
 
+  - `DATABASE_URL` — PostgreSQL connection string
+  - `FRONTEND_URL` — URL of your frontend (e.g. http://localhost:5173)
+  - `BACKEND_URL` — URL of this backend (e.g. http://localhost:4000)
+  - `CLOUDINARY_CLOUD_NAME`
+  - `CLOUDINARY_API_KEY`
+  - `CLOUDINARY_API_SECRET`
+  - `CHAPA_API_SECRET`
+  - `PORT` — port to run backend (default in code if not set)
 
-Create a .env file inside /frontend:
+  If the project defines an `npm` start script, you can use `npm start` instead of `node server.js`.
 
-VITE_BACKEND_URL=your_backend_url
-VITE_FRONTEND_URL=your_frontend_url
-VITE_ADMIN_PASSWORD=your_admin_passkey
+  ### Frontend
 
+  ```powershell
+  cd frontend
+  npm install
+  # Create .env in frontend/ (example below)
+  npm run dev
+  ```
 
-Start the frontend:
-npm run dev
+  Recommended frontend `.env` variables (create `frontend/.env`):
 
-🌐 Deployment
+  - `VITE_BACKEND_URL` — API base URL (e.g. http://localhost:4000)
+  - `VITE_FRONTEND_URL` — frontend URL (e.g. http://localhost:5173)
+  - `VITE_ADMIN_PASSWORD` — admin password used by the app
 
-Frontend deployed at:
-https://mirajersey.netlify.app/
+  ## API (Overview)
+
+  The backend exposes several route groups. Exact routes are defined under `backend/routes/`.
+
+  - `GET /api/products` — list products
+  - `GET /api/products/:id` — product details
+  - `POST /api/products` — create a product (admin)
+  - `PUT /api/products/:id` — update product (admin)
+  - `DELETE /api/products/:id` — delete product (admin)
+
+  - `POST /api/orders` — create an order
+  - `GET /api/orders` — list orders (admin)
+
+  - `POST /api/payments` — payment webhook/checkout (Chapa integration)
+
+  - `POST /api/upload` — upload image to Cloudinary
+
+  - `POST /api/feedback` — submit feedback
+
+  Use `curl` or Postman to call endpoints. Example (PowerShell):
+
+  ```powershell
+  curl -Method GET "http://localhost:4000/api/products"
+  ```
+
+  ## Environment & Secrets
+
+  Keep secrets out of version control. Add them to `.env` files or your deployment secret manager.
+
+  ## Deployment
+
+  - Backend: any Node.js host (Heroku, Vercel Serverless functions, DigitalOcean App Platform, etc.)
+  - Frontend: static hosting (Netlify, Vercel, GitHub Pages) or served via Vite build
+
+  When deploying, set the same environment variables (DB, Cloudinary, Chapa) in the host's secret manager.
