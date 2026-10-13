@@ -2,6 +2,7 @@ import React from "react";
 import { FaTelegramPlane, FaTiktok, FaPhoneAlt, FaInstagram, FaMapMarker } from 'react-icons/fa';
 
 export default function FooterSection() {
+    const portfolioUrl = import.meta.env.VITE_PORTFOLIO_URL;
 
     return (
         <footer className="bg-[#0D1B2A] text-[#E0E1DD] px-6 py-10">
@@ -44,9 +45,9 @@ export default function FooterSection() {
 
             <div className="text-center text-sm text-[#E0E1DD]/60 mt-8">
                 © {new Date().getFullYear()} Mira Jersey. All rights reserved.
-                <p className="text-xs text-[#E0E1DD]/40">
-                    <a href="https://www.daviddeveloper.site" target="_blank">Developed by Dawit</a>
-                </p>
+                {portfolioUrl && <p className="text-xs text-[#E0E1DD]/40">
+                    <a href={portfolioUrl} target="_blank">Developed by Dawit</a>
+                </p>}
             </div>
         </footer>
     );
